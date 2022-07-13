@@ -9,10 +9,6 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.UUID;
 
-@Getter
-@Setter
-@Entity
-@Table(name = "security_users")
 public class User {
 	@Id
 	@GeneratedValue(generator = "UUID")
@@ -38,4 +34,12 @@ public class User {
 
 	@Column(nullable = false)
 	private Boolean locked;
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(
+			name = "security_user_roles",
+			joinColumns = @JoinColumn(name = "user_uuid"),
+			inverseJoinColumns = @JoinColumn(name = "role_uuid")
+	)
+	private List<Role> roles;
 }
