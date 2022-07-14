@@ -9,6 +9,10 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.UUID;
 
+@Getter
+@Setter
+@Entity
+@Table(name = "security_users")
 public class User {
 	@Id
 	@GeneratedValue(generator = "UUID")
